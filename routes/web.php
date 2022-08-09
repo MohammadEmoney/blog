@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PostController as FrontPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/posts/{post:slug}', [FrontPostController::class, 'show'])->name('front.posts.show');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

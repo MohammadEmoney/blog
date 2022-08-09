@@ -11,6 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::published()->latest()->paginate();
-        return view('front.index', compact('posts'));
+        $backgroundImage = 'front/assets/img/home-bg-2.jpg';
+        return view('front.index', compact('posts', 'backgroundImage'));
     }
 }
