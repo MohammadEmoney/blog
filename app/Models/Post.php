@@ -9,6 +9,12 @@ class Post extends Model
 {
     use HasFactory;
 
+    public const STATUS = [
+        'draft' => 'پیش نویس',
+        'publish' => 'منتشر شده',
+        'private' => 'شخصی',
+    ];
+
     /**
      * fillable properties
      *
@@ -19,13 +25,20 @@ class Post extends Model
     ];
 
     /**
-     * image morph many relations
+     * The relationships that should always be loaded.
      *
-     * @return MorphMany
+     * @var array
      */
-    public function images()
+    protected $with = ['author', 'image'];
+
+    /**
+     * image morph relation
+     *
+     * @return MorphOne
+     */
+    public function image()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     /**
@@ -45,6 +58,11 @@ class Post extends Model
      */
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopePublished($query)
+    {
+        return $this->where('status', 'publish');
     }
 }

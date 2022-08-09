@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest()->paginate();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -26,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -37,7 +39,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        Category::create($request->validated());
+        return redirect()->route('categories.index')->with(['succcess' => 'دسته بندی با موفقیت افزوده شد']);
     }
 
     /**
@@ -59,7 +62,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $categories = Category::select('id', 'name')->where('id', '!=', $category->id)->get();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -71,7 +75,8 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+        return redirect()->route('categories.index')->with(['succcess' => 'دسته بندی با موفقیت ویرایش شد']);
     }
 
     /**
@@ -82,6 +87,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with(['succcess' => 'دسته بندی با موفقیت حذف شد']);
     }
 }

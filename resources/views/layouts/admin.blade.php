@@ -10,9 +10,10 @@
             @include('layouts.admin_partials.header')
 
             @include('layouts.admin_partials.sidebar')
-
-            @yield('content')
-
+             <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                @yield('content')
+            </div>
             <!-- Footer Start -->
             @include('layouts.admin_partials.footer')
         <!-- Footer End -->

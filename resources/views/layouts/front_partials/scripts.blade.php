@@ -1,8 +1,5 @@
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('front/lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('front/lib/slick/slick.min.js') }}"></script>
-
+ <!-- Bootstrap core JS-->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+ <!-- Core theme JS-->
 <!-- Template Javascript -->
-<script src="{{ asset('front/js/main.js') }}"></script>
+<script src="{{ asset('front/js/scripts.js') }}"></script>

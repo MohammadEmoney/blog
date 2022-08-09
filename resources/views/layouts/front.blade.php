@@ -6,6 +6,8 @@
 
     <body>
         <!-- Top Bar Start -->
+        @include('layouts.front_partials.nav')
+
         @include('layouts.front_partials.header')
 
 
@@ -14,8 +16,6 @@
         <!-- Footer Start -->
         @include('layouts.front_partials.footer')
         <!-- Footer End -->
-
-
 
         <!-- Back to Top -->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
