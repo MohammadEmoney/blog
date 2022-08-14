@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate();
+        $users = User::with('roles')->latest()->paginate();
         return view('admin.users.index', compact('users'));
     }
 
@@ -27,7 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::get();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -38,7 +40,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create($request->validated());
+        $user->assignRole(Role::find($request->role_id));
+        return redirect()->route('users.index')->with(['succcess' => 'کاربر با موفقیت افزوده شد']);
     }
 
     /**
@@ -60,7 +64,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::get();
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     /**
@@ -72,7 +77,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+        $user->syncRoles(Role::find($request->role_id));
+        return redirect()->route('users.index')->with(['succcess' => 'کاربر با موفقیت ویرایش شد']);
     }
 
     /**
@@ -83,6 +90,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        return redirect()->route('users.index')->with(['succcess' => 'کاربر با موفقیت حذف شد']);
     }
 }

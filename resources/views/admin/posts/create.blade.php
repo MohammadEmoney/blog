@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', $title = "پست ها")
+@section('title', $title = "افزودن پست")
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">خانه</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">خانه</a></li>
             <li class="breadcrumb-item"><a href="{{ route('posts.index') }}">پست ها</a></li>
             <li class="breadcrumb-item active">{{ $title }}</li>
           </ol>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Front\CategoryController as FrontCategoryController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PostController as FrontPostController;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/posts/{post:slug}', [FrontPostController::class, 'show'])->name('front.posts.show');
+Route::get('categories', [FrontCategoryController::class, 'index'])->name('front.categories.index');
+Route::get('categories/{category:slug}', [FrontCategoryController::class, 'show'])->name('front.categories.show');
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth'])->prefix('Admin')->group(function(){
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('posts', PostController::class)->except('show');

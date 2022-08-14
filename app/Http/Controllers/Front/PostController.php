@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function show(Post $post)
     {
-        $backgroundImage = $post->image->src;
+        $backgroundImage = $post->image ? $post->image->src : null;
         return view('front.posts.show', compact('post', 'backgroundImage'));
     }
 }
