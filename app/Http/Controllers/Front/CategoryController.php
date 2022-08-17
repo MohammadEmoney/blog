@@ -16,7 +16,9 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category->load('posts');
+        $category->load(['posts' => function($query){
+            $query->where('status', 'publish');
+        }]);
         return view('front.categories.show', compact('category'));
     }
 }
