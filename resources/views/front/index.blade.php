@@ -23,7 +23,7 @@
             @endforeach
 
             <!-- Post preview-->
-            <div class="post-preview">
+            {{-- <div class="post-preview">
                 <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
                 <p class="post-meta">
                     Posted by
@@ -60,7 +60,7 @@
                 </p>
             </div>
             <!-- Divider-->
-            <hr class="my-4" />
+            <hr class="my-4" /> --}}
             <!-- Pager-->
             {{-- <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div> --}}
             {{ $posts->links("pagination::bootstrap-4") }}
